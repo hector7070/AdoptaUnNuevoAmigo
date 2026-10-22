@@ -1,4 +1,4 @@
-﻿using Abstracciones.Interfaces;
+﻿using Abstracciones.Interfaces.Especie;
 using Abstracciones.Modelos;
 using DA.Contexto;
 using Microsoft.EntityFrameworkCore;

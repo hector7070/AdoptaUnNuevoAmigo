@@ -3,7 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace Abstracciones.Interfaces
+namespace Abstracciones.Interfaces.Especie
 {
     public interface IEspecieDA
     {

@@ -1,4 +1,4 @@
-﻿using Abstracciones.Interfaces;
+﻿using Abstracciones.Interfaces.IEspecie;
 using Abstracciones.Modelos;
 using DA.Contexto;
 using Microsoft.AspNetCore.Mvc;
