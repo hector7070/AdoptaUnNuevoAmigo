@@ -1,6 +1,6 @@
-﻿using Abstracciones.Interfaces.Especie;
+﻿using Abstracciones.Interfaces.IEspecie;
 using Abstracciones.Modelos;
-using DA.Contexto;
+using DA.Contexto.AdopcionContexto;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;

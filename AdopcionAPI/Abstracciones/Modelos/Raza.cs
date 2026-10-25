@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Abstracciones.Modelos
 {
-    internal class Raza
+    public class Raza
     {
     }
 }

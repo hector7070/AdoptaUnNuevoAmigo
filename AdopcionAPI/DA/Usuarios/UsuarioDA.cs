@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace DA.Contexto.VeterinariaContexto
+namespace DA.Usuarios
 {
-    internal class VeterinariaContexto
+    internal class UsuarioDA
     {
     }
 }

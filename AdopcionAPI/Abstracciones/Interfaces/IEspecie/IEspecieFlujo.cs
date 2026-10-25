@@ -3,7 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace Abstracciones.Interfaces
+namespace Abstracciones.Interfaces.IEspecie
 {
     public interface IEspecieFlujo
     {
@@ -12,5 +12,7 @@ namespace Abstracciones.Interfaces
         Task<Especie> Agregar(Especie especie);
         Task<bool> Actualizar(int id, Especie datos);
         Task<bool> Eliminar(int id);
+
+        Task<Especie>
     }
 }

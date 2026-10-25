@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace Abstracciones.Modelos
+namespace Flujo.Usuarios
 {
-    internal class Veterinaria
+    internal class UsuarioFlujo
     {
     }
 }
