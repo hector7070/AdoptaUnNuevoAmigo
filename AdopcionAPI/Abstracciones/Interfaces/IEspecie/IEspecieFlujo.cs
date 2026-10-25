@@ -13,6 +13,5 @@ namespace Abstracciones.Interfaces.IEspecie
         Task<bool> Actualizar(int id, Especie datos);
         Task<bool> Eliminar(int id);
 
-        Task<Especie>
     }
 }

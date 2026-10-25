@@ -14,7 +14,7 @@ namespace Abstracciones.Interfaces.IUsuario
 
         Task<Usuario> GuardarUsuario(Usuario usuario);
 
-        Task<bool> ActualizarUsuario(Usuario usuairo, int id);
+        Task<bool> ActualizarUsuario(Usuario usuario, int id);
 
         Task<bool> EliminarUsuario(int id);
 
