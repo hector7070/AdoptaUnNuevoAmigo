@@ -2,10 +2,12 @@
 using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Text.Json.Serialization;
 
 namespace Abstracciones.VisitasDomiciliarias
 {
 
+    [JsonConverter(typeof(JsonStringEnumConverter))]
     public enum ResultadoVisita { Pendiente, Favorable, Desfavorable } // Pendiente = 0: el índice filtrado depende de eso
 
 

@@ -36,12 +36,13 @@ namespace Flujo.Solicitudes
         private readonly ReglasAdopcionOpciones _reglas;
 
         public SolicitudFlujo(ISolicitudDA solicitudDA, IAnimalDA animalDA, IAdoptanteDA adoptanteDA,
-            IVacunacionDA vacunaDA, TimeProvider reloj, IOptions<ReglasAdopcionOpciones> reglas)
+            IVacunacionDA vacunaDA, IVisitaDA visitaDA, TimeProvider reloj, IOptions<ReglasAdopcionOpciones> reglas)
         {
             _solicitudDA = solicitudDA;
             _animalDA = animalDA;
             _adoptanteDA = adoptanteDA;
             _vacunaDA = vacunaDA;
+            _visitaDA = visitaDA;
             _reloj = reloj;
             _reglas = reglas.Value;
         }

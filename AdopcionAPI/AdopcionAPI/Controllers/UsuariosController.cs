@@ -29,5 +29,15 @@ namespace AdopcionAPI.Controllers
             var creado = await _flujo.CrearAsync(dto, ct);
             return CreatedAtAction(nameof(Listar), null, creado);
         }
+
+        [HttpPatch("{id:int:min(1)}/rol")]
+        [Authorize(Roles = nameof(RolUsuario.Administrador))]
+        [ProducesResponseType<UsuarioDto>(StatusCodes.Status200OK)]
+        [ProducesResponseType<ValidationProblemDetails>(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType<ProblemDetails>(StatusCodes.Status401Unauthorized)]
+        [ProducesResponseType<ProblemDetails>(StatusCodes.Status403Forbidden)]
+        [ProducesResponseType<ProblemDetails>(StatusCodes.Status404NotFound)]
+        public async Task<ActionResult<UsuarioDto>> CambiarRol(int id, UsuarioCambiarRolDto dto, CancellationToken ct) =>
+            Ok(await _flujo.CambiarRolAsync(id, dto.Rol, ct));
     }
 }

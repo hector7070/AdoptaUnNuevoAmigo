@@ -14,9 +14,9 @@ export function PublicLayout({
   children,
 }: PublicLayoutProps) {
   return (
-    <div className="flex min-h-screen flex-col bg-[#FAF8F5] text-[#11181C]">
+    <div className="flex min-h-screen flex-col overflow-x-clip bg-[#FAF8F5] text-[#11181C]">
       <PublicNavbar availableCount={availableCount} onLoginClick={onLoginClick} />
-      <main className="mx-auto w-full max-w-6xl flex-1 px-6 pb-8 pt-5 md:px-8 md:pt-8">
+      <main className="mx-auto w-full min-w-0 max-w-6xl flex-1 px-4 pb-8 pt-5 sm:px-6 md:px-8 md:pt-8">
         {children}
       </main>
       <Footer />

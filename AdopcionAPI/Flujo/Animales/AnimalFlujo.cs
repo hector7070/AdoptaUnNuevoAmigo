@@ -56,7 +56,7 @@ namespace Flujo.Animales
 
         public async Task<AnimalDtos.AnimalDto> CrearAsync(AnimalDtos.AnimalCrearDTO dto, CancellationToken ct)
         {
-            if (await _animalDA.ObtenerPorIdAsync(dto.RazaId, ct) is null)
+            if (await _razaDA.ObtenerPorIdAsync(dto.RazaId, ct) is null)
                 throw new ValidacionNegocioException($"La raza {dto.RazaId} no existe.");
 
 

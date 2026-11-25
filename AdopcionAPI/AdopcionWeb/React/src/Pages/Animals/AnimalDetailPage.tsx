@@ -75,10 +75,7 @@ export default function AnimalDetailPage({
   const isSterilized = animal.esterilizado.toLowerCase().startsWith("s");
 
   const handleAdoptClick = () => {
-    // Placeholder until AdoptionRequestPage (Pantalla 3) is built next
-    window.alert(
-      `Próxima pantalla: Formulario de adopción para ${animal.nombre} (ID ${animal.idAnimal})`
-    );
+    router.visit(`/Adopcion/Solicitar/${animal.idAnimal}`);
   };
 
   return (
@@ -246,8 +243,8 @@ export default function AnimalDetailPage({
                   {animal.nombre} necesita un hogar!
                 </h2>
                 <p className="text-sm leading-relaxed text-[#52525B]">
-                  Ofrécele paseos diarios, agua fresca y un espacio seguro. Luego
-                  de la adaptación ofrécele un ambiente tranquilo, cariño y
+                  Ofrézcale paseos diarios, agua fresca y un espacio seguro. Luego
+                  de la adaptación ofrézcale un ambiente tranquilo, cariño y
                   paciencia.
                 </p>
               </CardBody>
@@ -259,15 +256,15 @@ export default function AnimalDetailPage({
                 El siguiente paso: conocerse
               </h2>
               <p className="mt-1.5 text-sm leading-relaxed text-[#52525B]">
-                Completa la solicitud. Nuestro equipo revisará tus datos y
-                coordinará una visita a tu domicilio antes de la adopción.
+                Complete la solicitud. Nuestro equipo revisará sus datos y
+                coordinará una visita a su domicilio antes de la adopción.
               </p>
 
               <Button
                 size="lg"
                 radius="full"
                 onPress={handleAdoptClick}
-                className="mt-5 w-full bg-[#F59E0B] font-semibold text-white shadow-[0_8px_20px_-4px_rgba(245,158,11,0.5)] md:w-auto md:px-10"
+                className="mt-5 w-full bg-[#F59E0B] font-semibold text-white shadow-[0_8px_20px_-4px_rgba(245,158,11,0.5)] md:hidden"
               >
                 Quiero adoptar a {animal.nombre}
               </Button>

@@ -49,7 +49,20 @@ public class CuentaController : Controller
                 new ClaimsPrincipal(identidad),
                 new AuthenticationProperties { ExpiresUtc = sesion.ExpiraEnUtc, IsPersistent = false });
 
-            return Url.IsLocalUrl(returnUrl) ? Redirect(returnUrl!) : RedirectToAction("Index", "Home");
+            if (Url.IsLocalUrl(returnUrl))
+                return Redirect(returnUrl!);
+
+            if (string.Equals(sesion.Rol, RolUsuario.Voluntario.ToString(), StringComparison.OrdinalIgnoreCase))
+                return Redirect("/voluntario");
+
+            if (string.Equals(sesion.Rol, RolUsuario.Veterinario.ToString(), StringComparison.OrdinalIgnoreCase))
+                return Redirect("/admin/historial-medico");
+
+            if (string.Equals(sesion.Rol, RolUsuario.Administrador.ToString(), StringComparison.OrdinalIgnoreCase) ||
+                string.Equals(sesion.Rol, RolUsuario.Coordinador.ToString(), StringComparison.OrdinalIgnoreCase))
+                return Redirect("/admin/solicitudes");
+
+            return RedirectToAction("Index", "Home");
         }
         catch (ApiCuentaException ex) when (ex.Codigo == 401)
         {

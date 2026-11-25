@@ -1,11 +1,22 @@
 import type { components } from "@/types/api.generated";
 
+export type AdoptanteDto = components["schemas"]["AdoptanteDto"];
 export type AnimalDto = components["schemas"]["AnimalDto"];
 export type ConsultaDto = components["schemas"]["ConsultaDto"];
 export type EspecieDto = components["schemas"]["EspecieDto"];
 export type RazaDto = components["schemas"]["RazaDto"];
 export type VacunacionDto = components["schemas"]["VacunacionDto"];
+export type TipoVacunaDto = components["schemas"]["TipoVacunaDto"];
+export type VeterinariaDto = components["schemas"]["VeterinariaDto"];
 export type SolicitudDto = components["schemas"]["SolicitudDto"];
+export type TipoViviendaDto = components["schemas"]["TipoViviendaDto"];
 export type VisitaDto = components["schemas"]["VisitaDto"];
 export type SeguimientoDto = components["schemas"]["SeguimientoDto"];
 export type AlertaDto = components["schemas"]["AlertaDto"];
+export type UsuarioDto = components["schemas"]["UsuarioDto"];
+export type EstadoAnimal = components["schemas"]["EstadoAnimal"];
+export type EstadoSolicitud = components["schemas"]["EstadoSolicitud"];
+export type EstadoSeguimiento = components["schemas"]["EstadoSeguimiento"];
+export type HitoSeguimiento = components["schemas"]["HitoSeguimiento"];
+export type ResultadoVisita = components["schemas"]["ResultadoVisita"];
+export type RolUsuario = components["schemas"]["RolUsuario"];

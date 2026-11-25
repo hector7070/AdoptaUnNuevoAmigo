@@ -66,8 +66,8 @@ export default function CatalogPage({
     selectedSpeciesId === "all" ? null : especieById.get(selectedSpeciesId);
 
   const sectionHeading = selectedSpecies
-    ? `Conoce a nuestros ${selectedSpecies.nombre.toLowerCase()}s`
-    : "Conoce a nuestras mascotas";
+    ? `Conozca a nuestros ${selectedSpecies.nombre.toLowerCase()}s`
+    : "Conozca a nuestras mascotas";
 
   const handleLoginClick = () => {
     router.visit("/Cuenta/Ingresar");
@@ -89,7 +89,7 @@ export default function CatalogPage({
               Una vida juntos.
             </h1>
             <p className="mt-2.5 text-sm leading-relaxed text-[#52525B]">
-              Conoce a nuestras mascotas que esperan un hogar y buscan una nueva familia!
+              Conozca a nuestras mascotas que esperan un hogar y buscan una nueva familia!
             </p>
           </div>
 
@@ -145,7 +145,7 @@ export default function CatalogPage({
                   No encontramos mascotas con ese filtro
                 </p>
                 <p className="mt-1 text-xs text-[#52525B]">
-                  Prueba buscando otro nombre, raza o cambiando la especie.
+                  Pruebe buscando otro nombre, raza o cambiando la especie.
                 </p>
                 <Button
                   size="sm"

@@ -109,6 +109,6 @@ namespace DA.Adoptantes
         }
 
         public Task<Adoptante?> ObtenerPorIdAsync(int id, CancellationToken ct) =>
-        _adoptanteContexto.Adoptantes.AsNoTracking().FirstOrDefaultAsync(a => a.IdAdoptante == id, ct);
+        _adoptanteContexto.Adoptantes.AsNoTracking().Include(a => a.TipoVivienda).FirstOrDefaultAsync(a => a.IdAdoptante == id, ct);
     }
 }

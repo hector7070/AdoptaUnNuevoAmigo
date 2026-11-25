@@ -27,6 +27,7 @@ namespace Abstracciones.Usuarios
     {
         Task<List<UsuarioDto>> ListarAsync(CancellationToken ct);
         Task<UsuarioDto> CrearAsync(UsuarioCrearDto dto, CancellationToken ct);
+        Task<UsuarioDto> CambiarRolAsync(int id, RolUsuario rol, CancellationToken ct);
     }
 }
 

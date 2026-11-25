@@ -49,4 +49,10 @@ namespace Abstracciones.Usuarios
 
         public bool Activo { get; set; } = true;
     }
+
+    public class UsuarioCambiarRolDto
+    {
+        [EnumDataType(typeof(RolUsuario), ErrorMessage = "El rol indicado no es válido.")]
+        public RolUsuario Rol { get; set; }
+    }
 }

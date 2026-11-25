@@ -2,10 +2,12 @@
 using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Text.Json.Serialization;
 
 namespace Abstracciones.Animales
 {
 
+    [JsonConverter(typeof(JsonStringEnumConverter))]
     public enum EstadoAnimal { Disponible, EnProceso, EnSeguimiento, Adoptado, NoAdoptable }
 
 

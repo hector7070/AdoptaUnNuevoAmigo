@@ -38,5 +38,15 @@ namespace Flujo.Usuarios
             await _usuarioDA.AgregarAsync(usuario, ct);
             return UsuarioMapeador.ADto(usuario);
         }
+
+        public async Task<UsuarioDto> CambiarRolAsync(int id, RolUsuario rol, CancellationToken ct)
+        {
+            var usuario = await _usuarioDA.ObtenerPorIdAsync(id, ct)
+                ?? throw new NoEncontradoException($"No existe un usuario con id {id}.");
+
+            usuario.Rol = rol;
+            await _usuarioDA.GuardarCambiosAsync(usuario, ct);
+            return UsuarioMapeador.ADto(usuario);
+        }
     }
 }

@@ -1,3 +1,4 @@
+using System.Text.Json.Serialization;
 using AdopcionWeb.Clients;
 using AdopcionWeb.Middleware;
 using InertiaCore.Extensions;
@@ -7,7 +8,9 @@ using Vite.AspNetCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
-builder.Services.AddControllersWithViews();
+builder.Services
+    .AddControllersWithViews()
+    .AddJsonOptions(o => o.JsonSerializerOptions.Converters.Add(new JsonStringEnumConverter()));
 builder.Services.AddInertia(options =>
 {
     options.RootView = "~/Views/App.cshtml";
@@ -51,6 +54,22 @@ builder.Services.AddHttpClient<AnimalesApiClient>(client =>
 {
     client.BaseAddress = new Uri(apiBaseUrl);
 });
+builder.Services.AddHttpClient<SolicitudesApiClient>(client =>
+{
+    client.BaseAddress = new Uri(apiBaseUrl);
+}).AddHttpMessageHandler<TokenApiHandler>();
+builder.Services.AddHttpClient<VoluntarioApiClient>(client =>
+{
+    client.BaseAddress = new Uri(apiBaseUrl);
+}).AddHttpMessageHandler<TokenApiHandler>();
+builder.Services.AddHttpClient<AdminSolicitudesApiClient>(client =>
+{
+    client.BaseAddress = new Uri(apiBaseUrl);
+}).AddHttpMessageHandler<TokenApiHandler>();
+builder.Services.AddHttpClient<AdminPanelApiClient>(client =>
+{
+    client.BaseAddress = new Uri(apiBaseUrl);
+}).AddHttpMessageHandler<TokenApiHandler>();
 
 // Cliente del login: NO lleva el handler, todavía no hay token.
 builder.Services.AddHttpClient<ICuentaApi, CuentaApi>(client =>

@@ -3,10 +3,12 @@ using Abstracciones.Animales;
 using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Text.Json.Serialization;
 
 namespace Abstracciones.Solicitudes
 {
 
+    [JsonConverter(typeof(JsonStringEnumConverter))]
     public enum EstadoSolicitud { Enviada, EnRevision, VisitaProgramada, Aprobada, Rechazada, Cancelada }
     // ORDEN IMPORTA: el índice filtrado de abajo usa los valores 0,1,2 (los activos).
 

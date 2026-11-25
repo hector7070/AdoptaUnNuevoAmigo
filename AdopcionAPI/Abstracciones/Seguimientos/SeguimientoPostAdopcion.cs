@@ -2,12 +2,16 @@
 using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Text.Json.Serialization;
 
 namespace Abstracciones.Seguimientos
 {
 
+    [JsonConverter(typeof(JsonStringEnumConverter))]
     public enum HitoSeguimiento { Dias30 = 30, Dias60 = 60, Dias90 = 90 }
+    [JsonConverter(typeof(JsonStringEnumConverter))]
     public enum EstadoSeguimiento { Pendiente, Favorable, Desfavorable, Vencido, Omitido }
+    [JsonConverter(typeof(JsonStringEnumConverter))]
     public enum TipoEventoAdopcion { AdopcionDefinitiva, AdopcionFallida }
 
     public class SeguimientoPostAdopcion

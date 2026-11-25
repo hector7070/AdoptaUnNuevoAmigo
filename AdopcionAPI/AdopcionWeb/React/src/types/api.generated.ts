@@ -4,6 +4,39 @@
  */
 
 export interface paths {
+    "/salud": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get: {
+            parameters: {
+                query?: never;
+                header?: never;
+                path?: never;
+                cookie?: never;
+            };
+            requestBody?: never;
+            responses: {
+                /** @description OK */
+                200: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content?: never;
+                };
+            };
+        };
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
     "/api/Adoptantes": {
         parameters: {
             query?: never;
@@ -503,6 +536,71 @@ export interface paths {
                 };
             };
         };
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/Auth/login": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        post: {
+            parameters: {
+                query?: never;
+                header?: never;
+                path?: never;
+                cookie?: never;
+            };
+            requestBody: {
+                content: {
+                    "application/json": components["schemas"]["LoginDto"];
+                    "text/json": components["schemas"]["LoginDto"];
+                    "application/*+json": components["schemas"]["LoginDto"];
+                };
+            };
+            responses: {
+                /** @description OK */
+                200: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content: {
+                        "text/plain": components["schemas"]["SesionDto"];
+                        "application/json": components["schemas"]["SesionDto"];
+                        "text/json": components["schemas"]["SesionDto"];
+                    };
+                };
+                /** @description Bad Request */
+                400: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content: {
+                        "text/plain": components["schemas"]["ValidationProblemDetails"];
+                        "application/json": components["schemas"]["ValidationProblemDetails"];
+                        "text/json": components["schemas"]["ValidationProblemDetails"];
+                    };
+                };
+                /** @description Unauthorized */
+                401: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content: {
+                        "text/plain": components["schemas"]["ProblemDetails"];
+                        "application/json": components["schemas"]["ProblemDetails"];
+                        "text/json": components["schemas"]["ProblemDetails"];
+                    };
+                };
+            };
+        };
+        delete?: never;
         options?: never;
         head?: never;
         patch?: never;
@@ -1886,6 +1984,203 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
+    "/api/Usuarios": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get: {
+            parameters: {
+                query?: never;
+                header?: never;
+                path?: never;
+                cookie?: never;
+            };
+            requestBody?: never;
+            responses: {
+                /** @description OK */
+                200: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content: {
+                        "text/plain": components["schemas"]["UsuarioDto"][];
+                        "application/json": components["schemas"]["UsuarioDto"][];
+                        "text/json": components["schemas"]["UsuarioDto"][];
+                    };
+                };
+            };
+        };
+        put?: never;
+        post: {
+            parameters: {
+                query?: never;
+                header?: never;
+                path?: never;
+                cookie?: never;
+            };
+            requestBody: {
+                content: {
+                    "application/json": components["schemas"]["UsuarioCrearDto"];
+                    "text/json": components["schemas"]["UsuarioCrearDto"];
+                    "application/*+json": components["schemas"]["UsuarioCrearDto"];
+                };
+            };
+            responses: {
+                /** @description Created */
+                201: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content: {
+                        "text/plain": components["schemas"]["UsuarioDto"];
+                        "application/json": components["schemas"]["UsuarioDto"];
+                        "text/json": components["schemas"]["UsuarioDto"];
+                    };
+                };
+                /** @description Bad Request */
+                400: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content: {
+                        "text/plain": components["schemas"]["ValidationProblemDetails"];
+                        "application/json": components["schemas"]["ValidationProblemDetails"];
+                        "text/json": components["schemas"]["ValidationProblemDetails"];
+                    };
+                };
+                /** @description Unauthorized */
+                401: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content: {
+                        "text/plain": components["schemas"]["ProblemDetails"];
+                        "application/json": components["schemas"]["ProblemDetails"];
+                        "text/json": components["schemas"]["ProblemDetails"];
+                    };
+                };
+                /** @description Forbidden */
+                403: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content: {
+                        "text/plain": components["schemas"]["ProblemDetails"];
+                        "application/json": components["schemas"]["ProblemDetails"];
+                        "text/json": components["schemas"]["ProblemDetails"];
+                    };
+                };
+                /** @description Conflict */
+                409: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content: {
+                        "text/plain": components["schemas"]["ProblemDetails"];
+                        "application/json": components["schemas"]["ProblemDetails"];
+                        "text/json": components["schemas"]["ProblemDetails"];
+                    };
+                };
+            };
+        };
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/Usuarios/{id}/rol": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch: {
+            parameters: {
+                query?: never;
+                header?: never;
+                path: {
+                    id: number;
+                };
+                cookie?: never;
+            };
+            requestBody: {
+                content: {
+                    "application/json": components["schemas"]["UsuarioCambiarRolDto"];
+                    "text/json": components["schemas"]["UsuarioCambiarRolDto"];
+                    "application/*+json": components["schemas"]["UsuarioCambiarRolDto"];
+                };
+            };
+            responses: {
+                /** @description OK */
+                200: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content: {
+                        "text/plain": components["schemas"]["UsuarioDto"];
+                        "application/json": components["schemas"]["UsuarioDto"];
+                        "text/json": components["schemas"]["UsuarioDto"];
+                    };
+                };
+                /** @description Bad Request */
+                400: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content: {
+                        "text/plain": components["schemas"]["ValidationProblemDetails"];
+                        "application/json": components["schemas"]["ValidationProblemDetails"];
+                        "text/json": components["schemas"]["ValidationProblemDetails"];
+                    };
+                };
+                /** @description Unauthorized */
+                401: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content: {
+                        "text/plain": components["schemas"]["ProblemDetails"];
+                        "application/json": components["schemas"]["ProblemDetails"];
+                        "text/json": components["schemas"]["ProblemDetails"];
+                    };
+                };
+                /** @description Forbidden */
+                403: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content: {
+                        "text/plain": components["schemas"]["ProblemDetails"];
+                        "application/json": components["schemas"]["ProblemDetails"];
+                        "text/json": components["schemas"]["ProblemDetails"];
+                    };
+                };
+                /** @description Not Found */
+                404: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content: {
+                        "text/plain": components["schemas"]["ProblemDetails"];
+                        "application/json": components["schemas"]["ProblemDetails"];
+                        "text/json": components["schemas"]["ProblemDetails"];
+                    };
+                };
+            };
+        };
+        trace?: never;
+    };
     "/api/Vacunaciones": {
         parameters: {
             query?: never;
@@ -2426,9 +2721,9 @@ export type webhooks = Record<string, never>;
 export interface components {
     schemas: {
         AdoptanteActualizarDTO: {
-            identificacion?: string;
+            identificacion: string;
             nombre: string;
-            contacto?: string;
+            contacto: string;
             otrasMascotas?: string;
             /** Format: int32 */
             tipoViviendaId?: number | string;
@@ -2437,9 +2732,9 @@ export interface components {
             fechaRegistro?: string;
         };
         AdoptanteCrearDTO: {
-            identificacion?: string;
+            identificacion: string;
             nombre: string;
-            contacto?: string;
+            contacto: string;
             otrasMascotas?: string;
             /** Format: int32 */
             tipoViviendaId?: number | string;
@@ -2475,26 +2770,26 @@ export interface components {
         };
         AnimalActualizarDTO: {
             nombre: string;
-            sexo?: string;
-            esterilizado?: string;
-            tamanio?: string;
+            sexo: string;
+            esterilizado: string;
+            tamanio: string;
             /** Format: int32 */
             razaId?: number | string;
             /** Format: date-time */
-            fechaNacimiento?: string;
+            fechaNacimiento: string;
             activo?: boolean;
             fotoUrl?: null | string;
             descripcion?: null | string;
         };
         AnimalCrearDTO: {
             nombre: string;
-            sexo?: string;
-            esterilizado?: string;
-            tamanio?: string;
+            sexo: string;
+            esterilizado: string;
+            tamanio: string;
             /** Format: int32 */
             razaId?: number | string;
             /** Format: date-time */
-            fechaNacimiento?: string;
+            fechaNacimiento: string;
             activo?: boolean;
             fotoUrl?: null | string;
             descripcion?: null | string;
@@ -2518,7 +2813,7 @@ export interface components {
         };
         ConsultaActualizarDTO: {
             /** Format: date-time */
-            fecha?: string;
+            fecha: string;
             diagnostico: string;
             tratamiento: string;
         };
@@ -2528,7 +2823,7 @@ export interface components {
             /** Format: int32 */
             animalId?: number | string;
             /** Format: date-time */
-            fecha?: string;
+            fecha: string;
             diagnostico: string;
             tratamiento: string;
         };
@@ -2565,10 +2860,18 @@ export interface components {
             /** Format: date-time */
             fechaRegistro: string;
         };
-        EstadoAnimal: number;
-        EstadoSeguimiento: number;
-        EstadoSolicitud: number;
-        HitoSeguimiento: number;
+        /** @enum {unknown} */
+        EstadoAnimal: "Disponible" | "EnProceso" | "EnSeguimiento" | "Adoptado" | "NoAdoptable";
+        /** @enum {unknown} */
+        EstadoSeguimiento: "Pendiente" | "Favorable" | "Desfavorable" | "Vencido" | "Omitido";
+        /** @enum {unknown} */
+        EstadoSolicitud: "Enviada" | "EnRevision" | "VisitaProgramada" | "Aprobada" | "Rechazada" | "Cancelada";
+        /** @enum {unknown} */
+        HitoSeguimiento: "Dias30" | "Dias60" | "Dias90";
+        LoginDto: {
+            correo: string;
+            password: string;
+        };
         ProblemDetails: {
             type?: null | string;
             title?: null | string;
@@ -2594,7 +2897,10 @@ export interface components {
             /** Format: date-time */
             fechaRegistro: string;
         };
-        ResultadoVisita: number;
+        /** @enum {unknown} */
+        ResultadoVisita: "Pendiente" | "Favorable" | "Desfavorable";
+        /** @enum {unknown} */
+        RolUsuario: "Administrador" | "Coordinador" | "Veterinario" | "Voluntario";
         SeguimientoDto: {
             /** Format: int32 */
             idSeguimiento: number | string;
@@ -2616,8 +2922,16 @@ export interface components {
             favorable?: boolean;
             observaciones?: null | string;
         };
+        SesionDto: {
+            token: string;
+            /** Format: date-time */
+            expiraEnUtc: string;
+            nombre: string;
+            correo: string;
+            rol: string;
+        };
         SolicitudCambiarEstadoDTO: {
-            estado?: components["schemas"]["EstadoSolicitud"];
+            estado: components["schemas"]["EstadoSolicitud"];
         };
         SolicitudCrearDTO: {
             /** Format: int32 */
@@ -2641,12 +2955,12 @@ export interface components {
             estado: components["schemas"]["EstadoSolicitud"];
         };
         TipoVacunaActualizarDTO: {
-            nombre?: string;
+            nombre: string;
             obligatoria?: boolean;
             activo?: boolean;
         };
         TipoVacunaCrearDTO: {
-            nombre?: string;
+            nombre: string;
             obligatoria?: boolean;
             activo?: boolean;
         };
@@ -2676,11 +2990,32 @@ export interface components {
             /** Format: date-time */
             fechaRegistro: string;
         };
+        UsuarioCambiarRolDto: {
+            rol?: components["schemas"]["RolUsuario"];
+        };
+        UsuarioCrearDto: {
+            nombre: string;
+            apellidoPaterno: string;
+            apellidoMaterno?: null | string;
+            correo: string;
+            nombreUsuario: string;
+            password: string;
+            rol?: components["schemas"]["RolUsuario"];
+            activo?: boolean;
+        };
+        UsuarioDto: {
+            /** Format: int32 */
+            id: number | string;
+            nombre: string;
+            correo: string;
+            nombreUsuario: string;
+            rol: string;
+        };
         VacunacionActualizarDTO: {
             /** Format: int32 */
             tipoVacunaId?: number | string;
             /** Format: date-time */
-            fecha?: string;
+            fecha: string;
             /** Format: date-time */
             proximaDosis?: string;
         };
@@ -2690,7 +3025,7 @@ export interface components {
             /** Format: int32 */
             tipoVacunaId?: number | string;
             /** Format: date-time */
-            fecha?: string;
+            fecha: string;
             /** Format: date-time */
             proximaDosis?: string;
         };
@@ -2720,17 +3055,17 @@ export interface components {
             };
         };
         VeterinariaActualizarDTO: {
+            nombre: string;
             /** Format: date-time */
-            fechaRegistro: string;
-            nombre?: string;
+            fechaRegistro?: string;
             diagnostico?: string;
             tratamiento?: string;
             activo?: boolean;
         };
         VeterinariaCrearDTO: {
+            nombre: string;
             /** Format: date-time */
-            fechaRegistro: string;
-            nombre?: string;
+            fechaRegistro?: string;
             diagnostico?: string;
             tratamiento?: string;
             activo?: boolean;
@@ -2751,7 +3086,7 @@ export interface components {
             /** Format: int32 */
             voluntarioId?: number | string;
             /** Format: date-time */
-            fecha?: string;
+            fecha: string;
         };
         VisitaDto: {
             /** Format: int32 */
@@ -2767,7 +3102,7 @@ export interface components {
             observaciones: null | string;
         };
         VisitaResultadoDTO: {
-            resultado?: components["schemas"]["ResultadoVisita"];
+            resultado: components["schemas"]["ResultadoVisita"];
             observaciones?: null | string;
         };
     };
