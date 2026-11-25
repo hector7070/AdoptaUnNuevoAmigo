@@ -25,16 +25,16 @@ public class AnimalesApiClient
             return null;
 
         resp.EnsureSuccessStatusCode();
-        var animal = await resp.Content.ReadFromJsonAsync<AnimalDto>(ct);
+        var animal = await resp.Content.ReadFromJsonAsync<AnimalDto>(OpcionesJsonApi.Valor, ct);
         if (animal is null)
             return null;
 
         const int max = ParametrosPaginacion.TamanoMaximo;
 
         var vacunasTask = _http.GetFromJsonAsync<List<VacunacionDto>>(
-            $"api/vacunaciones?animalId={id}&tamano={max}", ct);
+            $"api/vacunaciones?animalId={id}&tamano={max}", OpcionesJsonApi.Valor, ct);
         var consultasTask = _http.GetFromJsonAsync<List<ConsultaDto>>(
-            $"api/consultas?animalId={id}&tamano={max}", ct);
+            $"api/consultas?animalId={id}&tamano={max}", OpcionesJsonApi.Valor, ct);
 
         await Task.WhenAll(vacunasTask, consultasTask);
 

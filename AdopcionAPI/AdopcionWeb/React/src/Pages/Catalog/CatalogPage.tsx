@@ -70,9 +70,7 @@ export default function CatalogPage({
     : "Conoce a nuestras mascotas";
 
   const handleLoginClick = () => {
-    window.alert(
-      "Próxima pantalla: Iniciar sesión (Administrador / Coordinador / Veterinario / Voluntario)"
-    );
+    router.visit("/Cuenta/Ingresar");
   };
 
   const handleSelectPet = (animal: AnimalDto) => {

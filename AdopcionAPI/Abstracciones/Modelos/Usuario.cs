@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Text;
+using Abstracciones.Usuarios;
 
 namespace Abstracciones.Modelos
 {
@@ -34,6 +35,8 @@ namespace Abstracciones.Modelos
         [Column("ACTIVO")]
         public bool Activo { get; set; } = true;
 
+        [Column("ROL"), MaxLength(30)]
+        public RolUsuario Rol { get; set; } = RolUsuario.Voluntario;
 
     }
 }

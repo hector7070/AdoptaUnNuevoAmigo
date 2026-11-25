@@ -23,10 +23,10 @@ public class CatalogoApiClient
     {
         const int max = ParametrosPaginacion.TamanoMaximo;
 
-        var animalesTask = _http.GetFromJsonAsync<List<AnimalDto>>($"api/animales?tamano={max}", ct);
-        var especiesTask = _http.GetFromJsonAsync<List<EspecieDto>>($"api/especies?tamano={max}", ct);
-        var razasTask = _http.GetFromJsonAsync<List<RazaDto>>($"api/razas?tamano={max}", ct);
-        var vacunasTask = _http.GetFromJsonAsync<List<VacunacionDto>>($"api/vacunaciones?tamano={max}", ct);
+        var animalesTask = _http.GetFromJsonAsync<List<AnimalDto>>($"api/animales?tamano={max}", OpcionesJsonApi.Valor, ct);
+        var especiesTask = _http.GetFromJsonAsync<List<EspecieDto>>($"api/especies?tamano={max}", OpcionesJsonApi.Valor, ct);
+        var razasTask = _http.GetFromJsonAsync<List<RazaDto>>($"api/razas?tamano={max}", OpcionesJsonApi.Valor, ct);
+        var vacunasTask = _http.GetFromJsonAsync<List<VacunacionDto>>($"api/vacunaciones?tamano={max}", OpcionesJsonApi.Valor, ct);
 
         await Task.WhenAll(animalesTask, especiesTask, razasTask, vacunasTask);
 

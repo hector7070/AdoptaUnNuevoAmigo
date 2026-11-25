@@ -3,4 +3,33 @@
 GET {{AdopcionAPI_HostAddress}}/weatherforecast/
 Accept: application/json
 
-###
+### ===== SEGURIDAD =====
+### Login como Administrador (la contraseña es la de Semilla:ClaveInicial)
+# @name loginAdmin
+POST {{AdopcionAPI_HostAddress}}/api/auth/login
+Content-Type: application/json
+
+{ "correo": "admin@adopta.cr", "password": "SU_CLAVE_DE_SEMILLA" }
+
+### Login como Coordinador
+# @name loginCoordinador
+POST {{AdopcionAPI_HostAddress}}/api/auth/login
+Content-Type: application/json
+
+{ "correo": "coordinador@adopta.cr", "password": "SU_CLAVE_DE_SEMILLA" }
+
+### Contraseña incorrecta: 401 con el mismo mensaje que un correo inexistente
+POST {{AdopcionAPI_HostAddress}}/api/auth/login
+Content-Type: application/json
+
+{ "correo": "admin@adopta.cr", "password": "incorrecta" }
+
+### Listar usuarios
+GET {{AdopcionAPI_HostAddress}}/api/usuarios
+
+### Crear usuario (solo Administrador: con otro rol responde 403)
+POST {{AdopcionAPI_HostAddress}}/api/usuarios
+Content-Type: application/json
+Authorization: Bearer {{loginAdmin.response.body.$.token}}
+
+{ "nombre": "Ana", "apellidoPaterno": "Mora", "correo": "ana@adopta.cr", "nombreUsuario": "ana", "password": "SU_CLAVE_DE_SEMILLA", "rol": "Voluntario", "activo": true }

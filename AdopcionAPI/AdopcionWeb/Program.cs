@@ -1,5 +1,8 @@
 using AdopcionWeb.Clients;
+using AdopcionWeb.Middleware;
 using InertiaCore.Extensions;
+using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.Authorization;
 using Vite.AspNetCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -9,6 +12,23 @@ builder.Services.AddInertia(options =>
 {
     options.RootView = "~/Views/App.cshtml";
 });
+
+// ---------- Sesión del MVC: la cookie guarda los claims y, dentro, el token del API ----------
+builder.Services
+    .AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
+    .AddCookie(o =>
+    {
+        o.LoginPath = "/Cuenta/Ingresar";
+        o.AccessDeniedPath = "/Cuenta/Denegado";
+        o.ExpireTimeSpan = TimeSpan.FromMinutes(60);
+        o.SlidingExpiration = false;
+        o.Cookie.HttpOnly = true;
+    });
+
+// El catálogo público no exige sesión, así que NO se pone una política global.
+builder.Services.AddAuthorization();
+builder.Services.AddHttpContextAccessor();
+builder.Services.AddTransient<TokenApiHandler>();
 
 builder.Services.AddViteServices(options =>
 {
@@ -32,6 +52,12 @@ builder.Services.AddHttpClient<AnimalesApiClient>(client =>
     client.BaseAddress = new Uri(apiBaseUrl);
 });
 
+// Cliente del login: NO lleva el handler, todavía no hay token.
+builder.Services.AddHttpClient<ICuentaApi, CuentaApi>(client =>
+{
+    client.BaseAddress = new Uri(apiBaseUrl);
+});
+
 var app = builder.Build();
 
 if (app.Environment.IsDevelopment())
@@ -45,8 +71,10 @@ else
 
 app.UseStaticFiles();
 app.UseRouting();
-app.UseInertia();
+app.UseAuthentication();
 app.UseAuthorization();
+app.UseInertia();
+app.UseMiddleware<CompartirSesion>();
 
 app.MapControllerRoute(
     name: "default",

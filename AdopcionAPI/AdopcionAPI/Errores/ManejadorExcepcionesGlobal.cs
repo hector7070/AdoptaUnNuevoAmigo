@@ -1,4 +1,5 @@
 using Abstracciones.Excepciones;
+using Abstracciones.Usuarios;
 using Microsoft.AspNetCore.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
 
@@ -30,6 +31,7 @@ public class ManejadorExcepcionesGlobal : IExceptionHandler
         {
             EntidadNoEncontradaException or NoEncontradoException => (StatusCodes.Status404NotFound, "Recurso no encontrado"),
             ConflictoConcurrenciaException or ConflictoException => (StatusCodes.Status409Conflict, "Conflicto con el estado actual"),
+            CredencialesInvalidasException => (StatusCodes.Status401Unauthorized, "Credenciales inválidas"),
             ReglaDeNegocioException or ValidacionNegocioException => (StatusCodes.Status400BadRequest, "Regla de negocio no cumplida"),
             _ => (0, string.Empty)
         };

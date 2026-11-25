@@ -2,10 +2,15 @@ using System.Text.Json.Serialization;
 using Abstracciones.Comunes;
 using Abstracciones.Seguimientos;
 using Abstracciones.Solicitudes;
+using Abstracciones.Usuarios;
 using AdopcionAPI.Errores;
+using AdopcionAPI.Seguridad;
 using DA;
 using DA.Seed;
 using Flujo;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.IdentityModel.Tokens;
 using Scalar.AspNetCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -27,7 +32,42 @@ builder.Services.AddExceptionHandler<ManejadorExcepcionesGlobal>();
 builder.Services.Configure<ReglasAdopcionOpciones>(builder.Configuration.GetSection("ReglasAdopcion"));
 builder.Services.Configure<SeguimientoOpciones>(builder.Configuration.GetSection(SeguimientoOpciones.Seccion));
 builder.Services.AddDatos(builder.Configuration);
+builder.Services.AddSeguridadDatos();
 builder.Services.AddFlujo();
+builder.Services.AddSeguridadFlujo();
+
+// ---------- Seguridad: JWT y roles ----------
+builder.Services.Configure<OpcionesJwt>(builder.Configuration.GetSection("Jwt"));
+builder.Services.AddSingleton<IGeneradorToken, GeneradorTokenJwt>();
+
+var jwt = builder.Configuration.GetSection("Jwt").Get<OpcionesJwt>() ?? new OpcionesJwt();
+
+// Interruptor Seguridad:Exigir. En false el API queda abierto y solo se protege lo marcado con [Authorize].
+var exigirSeguridad = builder.Configuration.GetValue<bool>("Seguridad:Exigir");
+
+if (exigirSeguridad && jwt.Clave.Length < 32)
+    throw new InvalidOperationException("Seguridad:Exigir está activo pero falta Jwt:Clave (mínimo 32 caracteres).");
+
+builder.Services
+    .AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+    .AddJwtBearer(o => o.TokenValidationParameters = new TokenValidationParameters
+    {
+        ValidateIssuer = true,           ValidIssuer = jwt.Emisor,
+        ValidateAudience = true,         ValidAudience = jwt.Audiencia,
+        ValidateLifetime = true,         ClockSkew = TimeSpan.FromMinutes(1),
+        ValidateIssuerSigningKey = true,
+        IssuerSigningKey = jwt.Clave.Length >= 32
+            ? new SymmetricSecurityKey(System.Text.Encoding.UTF8.GetBytes(jwt.Clave))
+            : null,
+        RoleClaimType = System.Security.Claims.ClaimTypes.Role,
+        NameClaimType = System.Security.Claims.ClaimTypes.Name
+    });
+
+builder.Services.AddAuthorization(o =>
+{
+    if (exigirSeguridad)
+        o.FallbackPolicy = new AuthorizationPolicyBuilder().RequireAuthenticatedUser().Build();
+});
 
 var app = builder.Build();
 
@@ -50,6 +90,7 @@ if (app.Configuration.GetValue<bool>("Base:MigrarAlIniciar"))
 if (args.Contains("--seed"))
 {
     await AdopcionSeeder.SeedAsync(app.Services);
+    await SeguridadSeeder.SeedAsync(app.Services, app.Configuration["Semilla:ClaveInicial"]);
     return;
 }
 
@@ -60,6 +101,7 @@ app.UseStatusCodePages();
 if (app.Environment.IsDevelopment())
 {
     await AdopcionSeeder.SeedAsync(app.Services);
+    await SeguridadSeeder.SeedAsync(app.Services, app.Configuration["Semilla:ClaveInicial"]);
 }
 
 // Documentación (OpenAPI + Scalar): siempre en Development; en Azure/Producción solo si Documentacion__Habilitar = true.
@@ -78,8 +120,11 @@ app.MapGet("/salud", async (ISaludBaseDatos salud, CancellationToken ct) =>
     .WithTags("Operación")
     .AllowAnonymous();
 
-app.UseAuthorization();
+app.UseAuthentication();   // ¿quién eres? (lee el token)
+app.UseAuthorization();    // ¿puedes entrar? (revisa roles). SIEMPRE después de UseAuthentication.
 
 app.MapControllers();
 
 app.Run();
+
+public partial class Program { }

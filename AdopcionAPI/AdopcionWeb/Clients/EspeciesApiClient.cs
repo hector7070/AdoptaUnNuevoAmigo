@@ -11,7 +11,7 @@ public class EspeciesApiClient
 
     public async Task<IReadOnlyList<EspecieDto>> ListarAsync(CancellationToken ct = default)
     {
-        return await _http.GetFromJsonAsync<List<EspecieDto>>("api/especies", ct)
+        return await _http.GetFromJsonAsync<List<EspecieDto>>("api/especies", OpcionesJsonApi.Valor, ct)
             ?? [];
     }
 }
